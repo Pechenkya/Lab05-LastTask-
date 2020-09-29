@@ -134,7 +134,7 @@ short get_median()
 	else
 	{
 		vec_size = 0;
-		return (temp_v[m] + temp_v[m + 1]) / 2;
+		return (temp_v[m] + temp_v[m - 1]) / 2;
 	}
 }
 
