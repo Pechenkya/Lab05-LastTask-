@@ -209,6 +209,9 @@ int main()
 	for (size_t i = 0; i < n; i++)
 		delete[] matrix[i];
 	delete[] matrix;
+	for (size_t i = 0; i < n; i++)
+		delete[] result_matrix[i];
+	delete[] result_matrix;
 	in.close();
 	out.close();
 	//
