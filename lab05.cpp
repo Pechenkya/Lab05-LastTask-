@@ -160,6 +160,7 @@ int main()
 	short int** matrix; 
 	short int** result_matrix;
 	std::ifstream in("matrix_input.txt");
+	std::ofstream out("matrix_result.txt");
 	in >> okol_s;
 	temp_v.resize(okol_s * okol_s + 1);
 	in >> n >> m;
@@ -193,8 +194,12 @@ int main()
 	for (size_t i = 0; i < n; i++)
 	{
 		for (size_t j = 0; j < m; j++)
+		{
 			std::cout << std::setw(3) << result_matrix[i][j] << ' ';
+			out << std::setw(3) << result_matrix[i][j] << ' ';
+		}
 		std::cout << std::endl;
+		out << std::endl;
 	}
 
 	//Cleating data, closing streams
@@ -202,6 +207,7 @@ int main()
 		delete[] matrix[i];
 	delete[] matrix;
 	in.close();
+	out.close();
 	//
 	system("Pause");
 	return 0;
