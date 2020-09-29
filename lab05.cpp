@@ -8,7 +8,7 @@ size_t okol_s{};
 size_t n{};
 size_t m{};
 std::vector<int> temp_v;
-size_t vec_size{0};
+size_t vec_size{ 0 };
 
 template <typename T, typename Container>
 size_t select(Container& container, size_t left, size_t right, size_t n);
@@ -125,16 +125,19 @@ int clamp_to_max(int a, int max)
 
 short get_median()
 {
-	const size_t m = select<int, std::vector<int>>(temp_v, 0, vec_size - 1, vec_size / 2);
 	if (vec_size % 2 == 1)
 	{
+		const short int median = temp_v[select<int, std::vector<int>>(temp_v, 0, vec_size - 1, vec_size / 2)];
 		vec_size = 0;
-		return temp_v[m];
+		return median;
 	}
 	else
 	{
+		const short int median1 = temp_v[select<int, std::vector<int>>(temp_v, 0, vec_size - 1, vec_size / 2)];
+		short int temp = temp_v[m];
+		const short int median2 = temp_v[select<int, std::vector<int>>(temp_v, 0, vec_size - 1, (vec_size - 1) / 2)];
 		vec_size = 0;
-		return (temp_v[m] + temp_v[m - 1]) / 2;
+		return (median1 + median2) / 2;
 	}
 }
 
@@ -142,11 +145,11 @@ void set_median(short int** matrix, short int** result_matrix, int i, int j)
 {
 	for (size_t c = clamp_to_min(i - (int)okol_s / 2, 0),
 		endc = clamp_to_max(i + (int)okol_s / 2, n - 1);
-			c <= endc; ++c)
+		c <= endc; ++c)
 	{
 		for (size_t r = clamp_to_min(j - (int)okol_s / 2, 0),
 			endr = clamp_to_max((j + (int)okol_s / 2), m - 1);
-				r <= endr; ++r)
+			r <= endr; ++r)
 		{
 			temp_v.at(vec_size++) = matrix[c][r];
 		}
@@ -157,7 +160,7 @@ void set_median(short int** matrix, short int** result_matrix, int i, int j)
 int main()
 {
 	//Creating arrays, reading data
-	short int** matrix; 
+	short int** matrix;
 	short int** result_matrix;
 	std::ifstream in("matrix_input.txt");
 	std::ofstream out("matrix_result.txt");
@@ -212,4 +215,3 @@ int main()
 	system("Pause");
 	return 0;
 }
-
